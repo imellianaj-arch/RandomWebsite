@@ -1540,7 +1540,8 @@ Teruslah melangkah, sekecil apa pun itu. Jangan remehkan jarak yang sudah kamu t
             quotesData.forEach((q, index) => { 
                 const card = document.createElement('div'); 
                 card.className = 'quote-card'; 
-                card.innerHTML = `"${q}"
+                card.innerHTML = `
+                    <div style="white-space: pre-wrap; width: 100%; word-break: break-word;">"${q}"</div>
                     <div class="action-btns-blog">
                         <button class="btn-mini" onclick="editQuote(${index})" title="Edit"><i class="fas fa-edit"></i></button>
                         <button class="btn-mini danger" onclick="deleteQuote(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
@@ -1593,16 +1594,14 @@ Teruslah melangkah, sekecil apa pun itu. Jangan remehkan jarak yang sudah kamu t
             const title = document.getElementById(type + 'Title').value; const content = document.getElementById(type + 'Content').value;
             if(title && content) {
                 if(editingArticleId) {
-                    // Update tulisan yang sudah ada
                     const dataArray = type === 'curhat' ? curhatData : ilmuData;
                     const index = dataArray.findIndex(i => i.id === editingArticleId);
                     if(index !== -1) {
                         dataArray[index].title = title;
                         dataArray[index].content = content;
                     }
-                    editingArticleId = null; // Reset setelah edit
+                    editingArticleId = null; 
                 } else {
-                    // Tambah baru
                     const newItem = { id: Date.now(), title: title, content: content, date: new Date().toLocaleDateString('id-ID') };
                     if(type === 'curhat') curhatData.push(newItem); else ilmuData.push(newItem);
                 }
@@ -1626,7 +1625,6 @@ Teruslah melangkah, sekecil apa pun itu. Jangan remehkan jarak yang sudah kamu t
             document.getElementById('detailDate').innerText = item.date; 
             document.getElementById('detailContent').innerText = item.content;
 
-            // Tombol Action khusus artikel
             document.getElementById('detailActions').innerHTML = `
                 <button class="btn-mini" style="padding:8px 15px; font-size:1rem;" onclick="editCurrentArticle()"><i class="fas fa-edit"></i> Edit Tulisan</button>
                 <button class="btn-mini danger" style="padding:8px 15px; font-size:1rem;" onclick="deleteCurrentArticle()"><i class="fas fa-trash"></i> Hapus</button>
@@ -1639,11 +1637,9 @@ Teruslah melangkah, sekecil apa pun itu. Jangan remehkan jarak yang sudah kamu t
             const item = currentDetailItem;
             closeBlogDetail();
             
-            // Buka formnya
             const formId = 'form' + type.charAt(0).toUpperCase() + type.slice(1);
             document.getElementById(formId).style.display = 'block';
             
-            // Isi datanya
             document.getElementById(type + 'Title').value = item.title;
             document.getElementById(type + 'Content').value = item.content;
             editingArticleId = item.id;
