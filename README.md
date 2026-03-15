@@ -1,2 +1,0 @@
-# RandomWebsite
-Website for fun.
