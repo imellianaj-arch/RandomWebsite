@@ -599,7 +599,7 @@
                     <img src="ImaGE/AL27.jpeg" onclick="openModal(this)">
                     </div>
                 <div class="gallery-item" data-category="Aku">
-                    <img src="ImaGE/AL28.jpeg" onclick="openModal(this)">
+                    <img src="ImaGE/AL28.jpg" onclick="openModal(this)">
                     </div>
                 <div class="gallery-item" data-category="Aku">
                     <img src="ImaGE/AL29.jpeg" onclick="openModal(this)">
@@ -1540,8 +1540,12 @@ Teruslah melangkah, sekecil apa pun itu. Jangan remehkan jarak yang sudah kamu t
             quotesData.forEach((q, index) => { 
                 const card = document.createElement('div'); 
                 card.className = 'quote-card'; 
+
+                // --- UBAH ENTER JADI TAG BR DI SINI ---
+                const textWithBreaks = q.replace(/\n/g, '<br>');
+
                 card.innerHTML = `
-                    <div style="white-space: pre-wrap; width: 100%; word-break: break-word;">"${q}"</div>
+                    <div style="width: 100%; word-break: break-word;">"${textWithBreaks}"</div>
                     <div class="action-btns-blog">
                         <button class="btn-mini" onclick="editQuote(${index})" title="Edit"><i class="fas fa-edit"></i></button>
                         <button class="btn-mini danger" onclick="deleteQuote(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
